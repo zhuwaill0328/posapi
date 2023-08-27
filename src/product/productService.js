@@ -1,78 +1,135 @@
+const { updateProduct } = require('./productController');
 var productModel = require('./productModel');
+var stockModel = require('./stockModel');
 
-module.exports.getProducts =(p)=>{
+module.exports.getProducts = (p) => {
 
-    return new Promise(function checkURL(resolve,reject){
+    return new Promise(function checkURL(resolve, reject) {
 
-        productModel.find(p,function returnData(error,result){
-            if(error) reject(false);
+        productModel.find(p, function returnData(error, result) {
+            if (error) reject(false);
             else resolve(result);
         })
-    
-    }).catch(error=>{
+
+    }).catch(error => {
         return error;
     });
 
 
 };
 
-module.exports.createProduct = (p)=>{
+module.exports.getStockHistory = (p) => {
 
-    return new Promise(function myFn(resolve,reject){
+    return new Promise(function checkURL(resolve, reject) {
+
+        stockModel.find(p, function returnData(error, result) {
+            if (error) reject(false);
+            else resolve(result);
+        })
+
+    }).catch(error => {
+        return error;
+    });
+
+}
+
+module.exports.StockHistory = (p) => {
+    return new Promise(function myFn(resolve, reject) {
+
+        var ps = new stockModel();
+        ps.Product = p.StockHistory.Product;
+        ps.Type = p.StockHistory.Type;
+        ps.CurrentQuantity = p.StockHistory.CurrentQuantity;
+        ps.Quantity = p.StockHistory.Quantity;
+        ps.User = p.StockHistory.User;
+        ps.CreatedAt = Date.now();
+
+        ps.save(function resultHandle(error, result) {
+            if (error) reject(false);
+            else {
+
+                if (p.New) {
+                    return resolve(result);
+                } else {
+
+                    return new Promise(function myFn(resolve, reject) {
+                        productModel.findByIdAndUpdate(p.Product._id, p.Product, function returnData(error, result) {
+                            if (error) reject(false);
+                            else resolve(result);
+
+                        });
+
+                    }).catch(error => {
+                        return error;
+                    });
+
+                }
+
+
+            }
+        }).catch(error => {
+            return error;
+        })
+
+    }).catch(error => {
+        return error;
+    });
+}
+
+module.exports.createProduct = (p) => {
+
+    return new Promise(function myFn(resolve, reject) {
         var pm = new productModel();
-        
+
         pm.Category = p.Category;
         pm.Name = p.Name;
         pm.Image = p.Image;
         pm.Stocks = p.Stocks;
-        pm.Serials  = p.Serials;
+        pm.Serials = p.Serials;
         pm.Price = p.Price;
         pm.Cost = p.Cost;
-      
-        pm.save(function resultHandle(error,result){
-            console.log(error)
-            if(error) reject(false);
+
+        pm.save(function resultHandle(error, result) {
+            if (error) reject(false);
             else resolve(result);
         });
 
-    }).catch((error)=>{
-        console.log(error);
-    }).catch(error=>{
+    }).catch(error => {
         return error;
     });
 
 
 };
 
-module.exports.updateProduct = (p)=>{
+module.exports.updateProduct = (p) => {
 
-    return new Promise(function myFn(resolve,reject){
-            productModel.findByIdAndUpdate(p.Id,p,function returnData(error,result){
-                if(error) reject(false);
-                else resolve(result);
-    
-            });
+    return new Promise(function myFn(resolve, reject) {
+        productModel.findByIdAndUpdate(p.Id, p, function returnData(error, result) {
+            if (error) reject(false);
+            else resolve(result);
 
-    }).catch(error=>{
+        });
+
+    }).catch(error => {
         return error;
     });
 
 
-} ;
+};
 
 
-module.exports.deleteProduct = (p)=>{
+module.exports.deleteProduct = (p) => {
 
-    return new Promise(function myFn(resolve,reject){
-        productModel.findByIdAndDelete(p.Id, function returnData(error,result){
+    return new Promise(function myFn(resolve, reject) {
+        productModel.findByIdAndDelete(p.Id, function returnData(error, result) {
 
-            if(error) reject(false);
+            if (error) reject(false);
             else resolve(result);
 
 
         })
 
-    }).catch(error=>{
+    }).catch(error => {
         return error;
     });
 

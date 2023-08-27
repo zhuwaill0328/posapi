@@ -1,69 +1,71 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+
+
 var productSchema = new Schema({
 
-    Name:{
+    Name: {
         type: String,
         required: true
     },
-    Category:{
+    Category: {
         type: String,
         required: true
     },
-    Image:{
+    Image: {
         type: String,
         required: true
     },
-    Stocks:{
+    Stocks: {
 
-        Quantity:{
-            type: Number,
-            default: 1,
-            required :true
-        },
-        Soldby: {
-            type: String,
-            required :true,
-        },
-        Weight: {
-            type: Number,
-            default:0,
-            required :true,
-        },
-        Threshold:{
+        Quantity: {
             type: Number,
             default: 1,
             required: true
         },
-        UnitofMeasurement:{
+        Soldby: {
+            type: String,
+            required: true,
+        },
+        Weight: {
+            type: Number,
+            default: 0,
+            required: true,
+        },
+        Threshold: {
+            type: Number,
+            default: 1,
+            required: true
+        },
+        UnitofMeasurement: {
             type: String,
             default: "None",
             required: true
         }
-        
+
     },
-    Serials:{
-        Barcode:{
+    Serials: {
+        Barcode: {
             type: String,
             unique: true
         },
         SKU: {
-            type:String
+            type: String
         }
     },
-    
-    Price:{
+
+    Price: {
         type: Number,
-        required :true
+        required: true
 
     },
-    Cost:{
+    Cost: {
         type: Number,
-        required :true,
+        required: true,
 
     }
-    
+
 });
 
-module.exports = mongoose.model('Product',productSchema);
+module.exports = mongoose.model('Product', productSchema);

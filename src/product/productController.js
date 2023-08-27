@@ -5,7 +5,21 @@ var jwt = require('jsonwebtoken');
 const ck = require('ckey');
 const secret = ck.SECRETS;
 
+var getStockHistory =async (req,res)=>{
+    try {
+        jwt.verify(req.token, secret, async (err) => {
+            if (err) res.sendStatus(403);
+            else {
 
+                var history = await service.getStockHistory(req.body);
+                res.send({ "status": true, "data": history });
+            }
+
+        })
+    } catch (err) {
+        res.send({ "status": true, "message": err });
+    }
+}
 
 var getProductList = async (req, res) => {
     try {
@@ -19,7 +33,7 @@ var getProductList = async (req, res) => {
 
         })
     } catch (err) {
-        res.send({ "status": true, "message": "Error getting product list" })
+        res.send({ "status": true, "message": "Error getting product list" });
     }
 }
 
@@ -30,13 +44,29 @@ var createProduct = async (req, res) => {
             if (err) res.sendStatus(403);
             else {
                 var status = await service.createProduct(req.body);
-                if (status) res.send({ "status": true, "message": "Product created." });
+                if (status) res.send({ "status": true, "message": "Product created." ,"data" : status });
                 else res.send({ "status": false, "message": "Failed to add product!"});
 
             }
         })
     } catch (err) {
         res.send({ "status": true, "message": "Error creating product" })
+    }
+}
+
+var StockHistory = async( req,res) =>{
+    try {
+        jwt.verify(req.token, secret, async (err) => {
+            if (err) res.sendStatus(403);
+            else {
+                var status = await service.StockHistory(req.body);
+                if (status) res.send({ "status": true, "message": "Stock updated." });
+                else res.send({ "status": false, "message": "Updating stock failed!!!" });
+
+            }
+        })
+    } catch (err) {
+        res.send({ "status": true, "message": "Error updating product stocks." })
     }
 }
 
@@ -77,4 +107,4 @@ var deleteProduct = async (req, res) => {
 }
 
 
-module.exports = { getProductList, updateProduct, deleteProduct, createProduct };
+module.exports = { getProductList, updateProduct, deleteProduct, createProduct,StockHistory,getStockHistory };

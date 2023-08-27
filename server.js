@@ -7,12 +7,17 @@ var routes = require('./routes/routes');
 const  mongoose = require('mongoose');
 const cors =require('cors');
 
+const multer = require('multer')
+const path = require('path')
+
+
+
 //important
 server.use(express.urlencoded({extended: false}));
 
 //important
 server.use(cors({
-    origin : "http://localhost:4200"
+    origin : "*"
 },
 {
     origin : "http://192.168.2.105:4200"
@@ -30,6 +35,8 @@ mongoose.connect(dbUrl,{useNewUrlParser: true,useUnifiedTopology: true},)
 
 //Important
 server.use(express.json());
+server.use("/uploads",express.static('uploads'))
+
 
 //imports routes
 server.use(routes);
@@ -40,3 +47,24 @@ server.listen(8080 ,function check(error){
   
     else console.log('Server is running at port 8080');
 })
+
+
+//upload images
+
+const storage = multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null,'uploads')
+    },
+    filename:( req,file,cb)=>{
+        console.log("file uploaded",file);
+        cb(null,"img_" + file.originalname )
+    },
+
+})
+
+const upload = multer({storage: storage})
+
+server.post('/upload',upload.single('image'), (req,res)=> {
+    res.send({"status": true, "message":'Image uploaded'});
+});
+
