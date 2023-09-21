@@ -49,7 +49,7 @@ var transaction = new Schema({
         required:true
     },
     Cart: {
-        type:Object
+        type:Array
     }
 
 
