@@ -1,4 +1,4 @@
-const { updateProduct } = require('./productController');
+
 var productModel = require('./productModel');
 var stockModel = require('./stockModel');
 
