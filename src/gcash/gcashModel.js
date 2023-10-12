@@ -52,7 +52,7 @@ var gcash = new Schema({
         type:Number,
         required:true
     },
-    AmountDue:{
+    TransactionFee:{
         type:Number,
         required:true
     }

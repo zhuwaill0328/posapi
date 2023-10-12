@@ -8,6 +8,7 @@ var userController =require('../src/user/userController');
 var transactionController =require('../src/transaction/transactionController');
 var gcashController = require('../src/gcash/gcashController');
 var customerController =require('../src/customer/customerController');
+var systemDetailsController = require('../src/system/systemController')
 
 //customer controls
 
@@ -58,6 +59,12 @@ router.delete('/product/delete', verifyToken,productController.deleteProduct);
 router.post('/product/stocks', verifyToken,productController.StockHistory);
 router.get('/product/stockhistory', verifyToken,productController.getStockHistory);
 
+//end
+
+//system details
+router.post('/system/save', verifyToken,systemDetailsController.saveSystemDetails);
+router.get('/system/get', verifyToken,systemDetailsController.getSystemDetails);
+router.patch('/system/update', verifyToken,systemDetailsController.updateSystemDetails);
 //end
 
 //authorization
