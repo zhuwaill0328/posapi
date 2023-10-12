@@ -1,58 +1,67 @@
-var transactionModel =require('./transactionModel');
+var transactionModel = require('./transactionModel');
+var pModel = require('../product/productModel');
 
-module.exports.getTransactions = (t)=>{
+module.exports.getTransactions = (t) => {
 
-    return new Promise(function checkURL(resolve,reject){
+    return new Promise(function checkURL(resolve, reject) {
 
-        transactionModel.find(t,function returnData(error,result){
-            if(error) reject(false);
+        transactionModel.find(t, function returnData(error, result) {
+            if (error) reject(false);
             else resolve(result);
         })
-    
-    }).catch(error=>{
+
+    }).catch(error => {
         return error;
     });
 
 
 };
 
-module.exports.createTransaction = (t)=>{
+module.exports.createTransaction = (t) => {
 
-    return new Promise(function myFn(resolve,reject){
+    return new Promise(function myFn(resolve, reject) {
         var tm = new transactionModel();
         tm.Customer = t.Customer;
         tm.User = t.User;
         tm.Date = t.Date;
         tm.Payment = t.Payment;
         tm.Status = t.Status;
-        tm.Cart =t.Cart;
+        tm.Cart = t.Cart;
 
-        tm.save(function resultHandle(error,result){
-            if(error) reject(false);
+        for(var i= 0;i < t.Products.length; i++){
+
+        console.log(t.Products[i])
+           
+         pModel.findByIdAndUpdate(t.Products[i].Id,t.Products[i]).catch(error=>{
+            console.log(error);
+         })
+
+        }
+
+        tm.save(function resultHandle(error, result) {
+            if (error) reject(false);
             else resolve(result);
         });
 
-    }).catch((error)=>{
-        console.log(error);
-    }).catch(error=>{
+    }).catch(error => {
         return error;
     });
 
 
 };
 
-module.exports.updateTransaction = (t)=>{
+module.exports.updateTransaction = (t) => {
 
-    return new Promise(function myFn(resolve,reject){
-            transactionModel.findByIdAndUpdate(t.Id,t,function returnData(error,result){
-                if(error) reject(false);
-                else resolve(result);
-    
-            });
+    return new Promise(function myFn(resolve, reject) {
+        transactionModel.findByIdAndUpdate(t.Id, t, function returnData(error, result) {
+            if (error) reject(false);
+            else resolve(result);
 
-    }).catch(error=>{
+        });
+
+    }).catch(error => {
         return error;
     });
 
 
-} ;
+};

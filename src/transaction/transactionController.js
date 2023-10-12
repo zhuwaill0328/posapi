@@ -28,12 +28,12 @@ var createTransaction = async (req, res) => {
             else {
                 var status = await transactionService.createTransaction(req.body);
                 if (status) res.send({ "status": true, "message": "Transaction success." });
-                else res.send({ "status": false, "message": "Transaction failed!!!" });
+                else res.send({ "status": false, "message": "Transaction Failed" });
 
             }
         })
     } catch (err) {
-        res.send({ "status": false, "message": "Error creating transactions." })
+        res.send({ "status": false, "message": err })
     }
 }
 

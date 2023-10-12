@@ -42,7 +42,6 @@ var gcash = new Schema({
     },
     TransactionType:{
         type:String,
-        enum:['CASHIN','CASHOUT'],
         required:true
     },
     ReferenceNumber:{
