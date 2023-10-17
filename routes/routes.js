@@ -62,9 +62,9 @@ router.get('/product/stockhistory', verifyToken,productController.getStockHistor
 //end
 
 //system details
-router.post('/system/save', verifyToken,systemDetailsController.saveSystemDetails);
+
 router.get('/system/get', verifyToken,systemDetailsController.getSystemDetails);
-router.patch('/system/update', verifyToken,systemDetailsController.updateSystemDetails);
+router.post('/system/update', verifyToken,systemDetailsController.updateSystemDetails);
 //end
 
 //authorization

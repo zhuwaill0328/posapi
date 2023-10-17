@@ -39,7 +39,7 @@ module.exports.saveSystemDetails = (t) => {
 module.exports.updateSystemDetails = (t) => {
 
     return new Promise(function myFn(resolve, reject) {
-        systemModel.findByIdAndUpdate(t.Id, t, function returnData(error, result) {
+        systemModel.findOneAndUpdate(t.Id, t,{upsert: true} , function returnData(error, result) {
             if (error) reject(false);
             else resolve(result);
 

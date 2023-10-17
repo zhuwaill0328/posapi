@@ -10,6 +10,9 @@ const cors =require('cors');
 const multer = require('multer')
 const path = require('path')
 
+var os = require('os');
+
+var networkInterfaces = os.networkInterfaces();
 
 
 //important
@@ -20,7 +23,7 @@ server.use(cors({
     origin : "*"
 },
 {
-    origin : "http://192.168.2.105:4200"
+    origin : "http://"+ networkInterfaces.Ethernet[1].address + ":4200"
 }
 ))
 
