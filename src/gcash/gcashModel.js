@@ -33,6 +33,7 @@ var gcash = new Schema({
     },
     Date:{
         type: Date,
+        default: Date.now(),
         required:true
     },
     Status:{
@@ -55,6 +56,15 @@ var gcash = new Schema({
     TransactionFee:{
         type:Number,
         required:true
+    },
+    CurrentUser: {
+        type:String,
+        required: true
+    },
+    FeeDeducted: {
+        type:Boolean,
+        required: true,
+        default:false
     }
     
 
