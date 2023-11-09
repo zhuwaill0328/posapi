@@ -27,7 +27,7 @@ var getProductList = async (req, res) => {
             if (err) res.sendStatus(403);
             else {
 
-                var product = await service.getProducts(req.body);
+                var product = await service.getProducts(req.query);
                 res.send({ "status": true, "data": product });
             }
 
@@ -71,6 +71,24 @@ var StockHistory = async( req,res) =>{
 }
 
 
+var bulkproductUpdate =async (req,res) =>{
+
+    try{
+        console.log(req)
+        jwt.verify(req.token,secret,async (err)=>{
+            if(err)res.sendStatus(403);
+            else{
+                var status = await service.bulkproductUpdate(req.body);
+                if(status) res.send({"status":true,"message": "Product Updated"});
+                else res.send({"status":false, "message":"Updating Products Failed"})
+            }
+        })
+    }catch(err){
+        res.send({ "status": false, "message": "Error updating products." })
+    }
+
+}
+
 var updateProduct = async (req, res) => {
 
     try {
@@ -84,7 +102,7 @@ var updateProduct = async (req, res) => {
             }
         })
     } catch (err) {
-        res.send({ "status": true, "message": "Error updating product." })
+        res.send({ "status": false, "message": "Error updating product." })
     }
 
 }
@@ -107,4 +125,4 @@ var deleteProduct = async (req, res) => {
 }
 
 
-module.exports = { getProductList, updateProduct, deleteProduct, createProduct,StockHistory,getStockHistory };
+module.exports = { getProductList, updateProduct, deleteProduct, createProduct,StockHistory,getStockHistory,bulkproductUpdate };

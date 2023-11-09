@@ -58,6 +58,7 @@ router.patch('/product/update', verifyToken,productController.updateProduct);
 router.delete('/product/delete', verifyToken,productController.deleteProduct);
 router.post('/product/stocks', verifyToken,productController.StockHistory);
 router.get('/product/stockhistory', verifyToken,productController.getStockHistory);
+router.patch('/product/bulkupdates',verifyToken,productController.bulkproductUpdate)
 
 //end
 

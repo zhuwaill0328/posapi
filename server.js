@@ -42,7 +42,7 @@ server.use("/uploads",express.static('uploads'))
 server.use(routes);
 
 //start the server
-server.listen(8080,'192.168.254.101' ,function check(error){
+server.listen(8080 ,function check(error){
     if(error) console.log('Invalid server configuration....');
   
     else console.log('Server is running at port 8080');
