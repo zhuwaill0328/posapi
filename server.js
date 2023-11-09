@@ -10,6 +10,9 @@ const cors =require('cors');
 const multer = require('multer')
 const path = require('path')
 
+var os = require('os');
+
+var networkInterfaces = os.networkInterfaces();
 
 
 //important
@@ -20,8 +23,10 @@ server.use(cors({
     origin : "*"
 },
 {
-    origin : "http://192.168.254.101:4200"
+
+    origin : "http://"+ networkInterfaces.Ethernet[1].address + ":4200"
 }
+
 ))
 
 //Connect to mongodb
@@ -42,7 +47,9 @@ server.use("/uploads",express.static('uploads'))
 server.use(routes);
 
 //start the server
-server.listen(8080 ,function check(error){
+
+server.listen(8080,networkInterfaces.Ethernet[1].address ? networkInterfaces.Ethernet[1].address: '127.0.0.1' ,function check(error){
+
     if(error) console.log('Invalid server configuration....');
   
     else console.log('Server is running at port 8080');
