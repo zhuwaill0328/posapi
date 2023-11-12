@@ -12,6 +12,10 @@ var debitSchema = new Schema({
         Phone: {
             type: String,
             required:true
+        },
+        Id: {
+            type:String,
+            requried:true
         }
     },
     User: {
