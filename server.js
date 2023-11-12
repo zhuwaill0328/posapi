@@ -12,19 +12,15 @@ const path = require('path')
 
 var os = require('os');
 
-var networkInterfaces = os.networkInterfaces();
+var ip = require('ip')
 
-
+console.log(ip.address())
 //important
 server.use(express.urlencoded({extended: false}));
 
 //important
 server.use(cors({
     origin : "*"
-},
-{
-
-    origin : "http://"+ networkInterfaces.Ethernet[1].address + ":4200"
 }
 
 ))
@@ -47,7 +43,9 @@ server.use("/uploads",express.static('uploads'))
 server.use(routes);
 
 //start the server
-server.listen(8080,networkInterfaces.Ethernet[1].address ? networkInterfaces.Ethernet[1].address: '127.0.0.1' ,function check(error){
+
+server.listen(8080,ip.address()? ip.address() : 'localhost',function check(error){
+
     if(error) console.log('Invalid server configuration....');
   
     else console.log('Server is running at port 8080');

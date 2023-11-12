@@ -27,6 +27,7 @@ module.exports.createTransaction = (t) => {
         tm.Payment = t.Payment;
         tm.Status = t.Status;
         tm.Cart = t.Cart;
+        tm.Total =t.Total
 
         for(var i= 0;i < t.Products.length; i++){
 

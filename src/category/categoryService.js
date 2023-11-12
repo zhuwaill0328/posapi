@@ -7,6 +7,8 @@ module.exports.getCategories =(c)=>{
 
             if(error)reject(false);
             else resolve(result);
+        }).sort({
+            Name: 1
         });
 
 

@@ -5,10 +5,11 @@ var stockModel = require('./stockModel');
 module.exports.getProducts = (p) => {
 
     return new Promise(function checkURL(resolve, reject) {
-
         productModel.find(p, function returnData(error, result) {
             if (error) reject(false);
             else resolve(result);
+        }).sort({
+            Name: 1
         })
 
     }).catch(error => {
@@ -17,6 +18,7 @@ module.exports.getProducts = (p) => {
 
 
 };
+
 
 module.exports.getStockHistory = (p) => {
 
@@ -100,6 +102,25 @@ module.exports.createProduct = (p) => {
 
 
 };
+
+module.exports.bulkproductUpdate = (p) =>{
+
+    return new Promise(function myFn(resolve,reject){
+        var criteria ={
+            _id : {$in : p.products}
+        }
+        console.log(p)
+        productModel.updateMany(criteria,{Category: p.category},{multi:true},function returnData(error,result){
+            if (error) reject(false);
+            else resolve(result);
+        });
+
+    }).catch((error)=>{
+        return error;
+    })
+    
+}
+
 
 module.exports.updateProduct = (p) => {
 

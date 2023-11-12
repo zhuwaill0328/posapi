@@ -20,15 +20,17 @@ module.exports.getTransactions = (t)=>{
 module.exports.createTransaction = (t)=>{
 
     return new Promise(function myFn(resolve,reject){
+
+        console.log(t)
         var tm = new gcashModel();
         tm.Customer = t.Customer;
         tm.User = t.User;
-        tm.Date = t.Date;
-        tm.Status =t.Status;
         tm.TransactionType = t.TransactionType;
         tm.ReferenceNumber =t.ReferenceNumber;
         tm.Amount = t.Amount;
-        tm.AmountDue =t.AmountDue;
+        tm.TransactionFee =t.TransactionFee;
+        tm.CurrentUser = t.CurrentUser
+        tm.v = t.FeeDeducted
         
         tm.save(function resultHandle(error,result){
             if(error) reject(false);

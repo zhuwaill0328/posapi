@@ -40,6 +40,11 @@ var transaction = new Schema({
             type:Number,
             default:0,
             required:true
+        },
+        Total:{
+            type:Number,
+            default: 0,
+            required:true
         }
 
     },
