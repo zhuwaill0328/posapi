@@ -8,6 +8,8 @@ module.exports.getProducts = (p) => {
         productModel.find(p, function returnData(error, result) {
             if (error) reject(false);
             else resolve(result);
+        }).sort({
+            Name: 1
         })
 
     }).catch(error => {

@@ -30,7 +30,7 @@ module.exports.createTransaction = (t)=>{
         tm.Amount = t.Amount;
         tm.TransactionFee =t.TransactionFee;
         tm.CurrentUser = t.CurrentUser
-        tm.FeeDeducted = t.FeeDeducted
+        tm.v = t.FeeDeducted
         
         tm.save(function resultHandle(error,result){
             if(error) reject(false);

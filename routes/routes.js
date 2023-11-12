@@ -9,7 +9,7 @@ var transactionController =require('../src/transaction/transactionController');
 var gcashController = require('../src/gcash/gcashController');
 var customerController =require('../src/customer/customerController');
 var systemDetailsController = require('../src/system/systemController')
-
+var debitController = require('../src/debit/debitController')
 //customer controls
 
 router.post("/customer/create",verifyToken,customerController.createCustomer);
@@ -66,6 +66,15 @@ router.patch('/product/bulkupdates',verifyToken,productController.bulkproductUpd
 
 router.get('/system/get', verifyToken,systemDetailsController.getSystemDetails);
 router.post('/system/update', verifyToken,systemDetailsController.updateSystemDetails);
+//end
+
+
+//customer debit
+router.get('/debit/get', verifyToken,debitController.getDebits);
+router.post('/debit/create', verifyToken,debitController.createDebit);
+router.patch('/debit/update', verifyToken,debitController.updateDebit);
+
+
 //end
 
 //authorization

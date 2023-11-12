@@ -47,7 +47,8 @@ var gcash = new Schema({
     },
     ReferenceNumber:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     Amount:{
         type:Number,
