@@ -28,8 +28,8 @@ var createDebit = async (req, res) => {
             if (err) {
                 res.sendStatus(403);
             } else {
-                var status = await debitService.createCategory(req.body);
-                if (status) res.send({ "status": true, "message": "Customer debit created." });
+                var status = await debitService.createDebit(req.body);
+                if (status) res.send({ "status": true, "message": "Customer debit created." ,"data" : status});
                 else res.send({ "status": false, "message": "Creating Customer debit failed!!!" });
 
             }
@@ -48,7 +48,7 @@ var updateDebit = async (req, res) => {
                 res.sendStatus(403);
             } else {
 
-                var status = await debitService.updatePayment(req.body);
+                var status = await debitService.updateDebit(req.body);
 
                 if (status) res.send({ "status": true, "message": "Customer debit updated." });
                 else res.send({ "status": false, "message": "Updating customer debit failed!!!" });

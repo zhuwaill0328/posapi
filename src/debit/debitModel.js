@@ -18,15 +18,9 @@ var debitSchema = new Schema({
             requried:true
         }
     },
-    User: {
-        Name: {
-            type:String,
-            required:true
-        },
-        Phone: {
-            type: String,
-            required:true
-        }
+    Username: {
+        type:String,
+        required:true
     },
     Transaction:{
        Id:{
@@ -35,32 +29,20 @@ var debitSchema = new Schema({
        },
        Date:{
         type:Date,
-        requried:true,
-        default: Date.now()
+        required: true
+       },
+       Balance: {
+        type:Number,
+        required:true
        },
        Amount:{
         type: Number,
         required: true
+       },
+       PaymentHistory:{
+           type:Array
        }
-
     },
-    PaymentHistory:{
-        Date:{
-            type:Date,
-            requried:true,
-            default: Date.now()
-        },
-        Amount:{
-            type:Number,
-            required:true
-        },
-        User:{
-            type:String,
-            required:true
-        }
-
-    }
-    ,
     Status:{
         type:String,
         required:true,
@@ -73,4 +55,4 @@ var debitSchema = new Schema({
 
 })
 
-module.exports = mongoose.model('Debit',debitSchema)
+module.exports = mongoose.model('debit',debitSchema)
