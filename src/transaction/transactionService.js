@@ -21,6 +21,9 @@ module.exports.createTransaction = (t) => {
 
     return new Promise(function myFn(resolve, reject) {
         var tm = new transactionModel();
+        if(t._id){
+            tm._id = t._id;
+        }
         tm.Customer = t.Customer;
         tm.User = t.User;
         tm.Date = t.Date;
