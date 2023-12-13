@@ -3,6 +3,7 @@ var jwt = require('jsonwebtoken');
 const ck = require('ckey');
 const dbUrl = ck.DATABASE;
 const server = express();
+var https = require('https');
 var routes = require('./routes/routes');
 const  mongoose = require('mongoose');
 const cors =require('cors');
@@ -13,6 +14,11 @@ const path = require('path')
 var os = require('os');
 
 var ip = require('ip')
+var fs = require('fs')
+var options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+}
 
 console.log(ip.address())
 //important
@@ -43,6 +49,14 @@ server.use("/uploads",express.static('uploads'))
 server.use(routes);
 
 //start the server
+/**https.createServer(options,server).listen(8080,ip.address()? ip.address() : 'localhost',function check(error){
+
+    if(error) console.log('Invalid server configuration....');
+  
+    else console.log('Server is running at port 8080');
+}) */
+
+
 
 server.listen(8080,ip.address()? ip.address() : 'localhost',function check(error){
 
