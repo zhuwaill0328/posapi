@@ -64,6 +64,11 @@ var productSchema = new Schema({
         type: Number,
         required: true,
 
+    },
+    Essentials: {
+        type: Boolean,
+        required: true,
+        default : false
     }
 
 });

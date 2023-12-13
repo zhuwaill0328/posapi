@@ -90,6 +90,7 @@ module.exports.createProduct = (p) => {
         pm.Serials = p.Serials;
         pm.Price = p.Price;
         pm.Cost = p.Cost;
+        pm.Essentials = p.Essentials
 
         pm.save(function resultHandle(error, result) {
             if (error) reject(false);
