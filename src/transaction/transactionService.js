@@ -43,6 +43,7 @@ module.exports.createTransaction = (t) => {
         }
 
         tm.save(function resultHandle(error, result) {
+            console.log(result)
             if (error) reject(false);
             else resolve(result);
         });
