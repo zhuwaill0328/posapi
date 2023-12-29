@@ -16,7 +16,6 @@ module.exports.getDebits=(d)=>{
 
 module.exports.createDebit = (db)=>{
     return new Promise(function myFn(resolve,reject){
-        console.log(db)
 
         const tr = {
             Id: id,
@@ -38,7 +37,7 @@ module.exports.createDebit = (db)=>{
 
 
     }).catch(error=>{
-        console.log(error)
+        //console.log(error)
         return error;
     });
 }

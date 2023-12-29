@@ -30,20 +30,20 @@ module.exports.createTransaction = (t) => {
         tm.Payment = t.Payment;
         tm.Status = t.Status;
         tm.Cart = t.Cart;
-        tm.Total =t.Total
+        ////tm.Total =t.Total
 
         for(var i= 0;i < t.Products.length; i++){
 
-        console.log(t.Products[i])
+       //console.log(t.Products[i])
            
-         pModel.findByIdAndUpdate(t.Products[i].Id,t.Products[i]).catch(error=>{
-            console.log(error);
+         pModel.findByIdAndUpdate(t.Products[i]._id,t.Products[i]).catch(error=>{
+           
          })
 
         }
 
         tm.save(function resultHandle(error, result) {
-            console.log(result)
+          
             if (error) reject(false);
             else resolve(result);
         });
