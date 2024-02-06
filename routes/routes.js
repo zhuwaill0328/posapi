@@ -76,8 +76,8 @@ router.post('/debit/create', verifyToken,debitController.createDebit);
 router.patch('/debit/update', verifyToken,debitController.updateDebit);
 
 
-router.post('/mysqldb/insertcart',mysqlController.InsertToCartHistory);
-router.get('/mysqldb/getdata',mysqlController.getData);
+router.post('/mysqldb/insertcart',verifyToken,mysqlController.InsertToCartHistory);
+router.get('/mysqldb/getdata',verifyToken,mysqlController.getData);
 
 //end
 

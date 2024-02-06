@@ -24,9 +24,17 @@ var InsertToCartHistory = async (req,res) => {
 
 var getData = async (req,res) =>{
     try{
-        var result = await mysqlService.getData(req.body);
-        console.log("DaTA",result)
-        res.send({"status": true, "data": result});
+
+        jwt.verify(req.token,secret,async (err) => {
+            if(err) res.sendStatus(403);
+            else{
+
+                var result = await mysqlService.getData(req.body);
+                console.log("DaTA",result)
+                res.send({"status": true, "data": result});
+            }
+        })
+       
     }catch(err){
         res.send({"status": false , "message": err})
     }
