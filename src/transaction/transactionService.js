@@ -1,5 +1,6 @@
 var transactionModel = require('./transactionModel');
 var pModel = require('../product/productModel');
+var mysqlService = require('../mysqldb/mysqlService')
 
 module.exports.getTransactions = (t) => {
 
@@ -35,6 +36,8 @@ module.exports.createTransaction = (t) => {
         for(var i= 0;i < t.Products.length; i++){
 
        //console.log(t.Products[i])
+
+        mysqlService.InsertToCartHistory()
            
          pModel.findByIdAndUpdate(t.Products[i]._id,t.Products[i]).catch(error=>{
            
