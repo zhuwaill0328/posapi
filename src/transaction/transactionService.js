@@ -65,6 +65,7 @@ module.exports.updateTransaction = (t) => {
         });
 
     }).catch(error => {
+        console.log(error)
         return error;
     });
 

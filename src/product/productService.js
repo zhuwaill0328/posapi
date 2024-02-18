@@ -93,11 +93,13 @@ module.exports.createProduct = (p) => {
         pm.Essentials = p.Essentials
 
         pm.save(function resultHandle(error, result) {
+            console.log(error)
             if (error) reject(false);
             else resolve(result);
         });
 
     }).catch(error => {
+        console.log(error)
         return error;
     });
 
